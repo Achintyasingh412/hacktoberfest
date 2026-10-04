@@ -1,0 +1,6 @@
+{
+  "name": "Hostel Nexus: Local AI Resource & Court Conflict Negotiator",
+  "description": "Privacy-first hostel resource booking and court conflict negotiator powered by local Gemma AI with Deep Vintage Mood styling, warden arbitration, and permanent transparency audit.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

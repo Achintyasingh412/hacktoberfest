@@ -21,10 +21,10 @@ app.post('/api/tts', async (req, res) => {
       return res.status(400).json({ error: 'Valid text parameter is required' });
     }
 
-    const apiKey = process.env.ELEVENLABS_API_KEY || process.env.VITE_ELEVENLABS_API_KEY;
+    const apiKey = process.env.ELEVENLABS_API_KEY;
     if (!apiKey) {
-      // Signal client to seamlessly use Web Speech API fallback
-      return res.json({ fallback: true, message: 'No ElevenLabs API key found. Using Web Speech API fallback.' });
+      // Signal client to seamlessly use Web Speech API fallback when ELEVENLABS_API_KEY is not set
+      return res.json({ fallback: true, message: 'ELEVENLABS_API_KEY environment variable is not set.' });
     }
 
     // Default voice: 'pNInz6obpgDQGcFmaJgB' (Adam - deep authoritative warden tone)
@@ -49,8 +49,8 @@ app.post('/api/tts', async (req, res) => {
 
     if (!response.ok) {
       const errText = await response.text();
-      console.warn('ElevenLabs API request failed, delegating to client Web Speech:', errText);
-      return res.json({ fallback: true, message: 'ElevenLabs API error' });
+      console.warn('ElevenLabs API request failed:', errText);
+      return res.json({ fallback: true, message: 'ElevenLabs API error response' });
     }
 
     const audioBuffer = await response.arrayBuffer();
